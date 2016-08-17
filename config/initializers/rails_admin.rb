@@ -41,6 +41,7 @@ RailsAdmin.config do |config|
     field :published
     field :avatar
     field :name
+    field :short_description
     field :content, :ck_editor
   end
 end

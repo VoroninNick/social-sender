@@ -1,0 +1,15 @@
+- if @articles.try(:any?)
+  table border="1"
+    - @articles.each do |article|
+      tr
+
+        td
+          = article.name
+        td
+
+          form action="/articles/#{article.id}/publish?providers=facebook" method="post"
+            button type="submit"
+              = !article.published_on_facebook_at ? "publish" : "published"
+
+- else
+  = "No articles"

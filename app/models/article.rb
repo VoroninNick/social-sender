@@ -5,14 +5,14 @@ class Article < ActiveRecord::Base
 
   scope :published, -> { where(published: 't') }
 
-  def publish(force = true, fql_token = Sender::GRAPH_QL_TOKEN)
+  def publish(force = true, fql_tokens = nil)
     if force || !self.published_on_facebook_at
       self.published_on_facebook_at = DateTime.now
       self.save
       attachment = {name: "link: #{self.name}", link: self.url, caption: self.name, description: self.short_description, picture: self.avatar_url}
       target_id = "me"
       options = {}
-      Sender.send_to_facebook(self.short_description, attachment, target_id, options, fql_token)
+      Sender.send_to_facebook(self.short_description, attachment, target_id, options, fql_tokens)
     end
   end
 

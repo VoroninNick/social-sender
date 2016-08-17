@@ -44,4 +44,8 @@ RailsAdmin.config do |config|
     field :short_description
     field :content, :ck_editor
   end
+
+  config.model FacebookAccount do
+    field :token
+  end
 end

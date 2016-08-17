@@ -56,3 +56,4 @@ gem 'cms', github: "pkorenev/cms"
 gem 'protected_attributes'
 gem 'slim-rails'
 gem 'bower-rails'
+gem 'figaro'

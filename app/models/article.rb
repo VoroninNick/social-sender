@@ -9,10 +9,20 @@ class Article < ActiveRecord::Base
     if force || !self.published_on_facebook_at
       self.published_on_facebook_at = DateTime.now
       self.save
-      attachment = {name: "link: #{self.name}", link: "http://animals.com/panda", caption: self.name, description: self.short_description, picture: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Chester_A_Arthur_by_Daniel_Huntington_crop.jpeg/200px-Chester_A_Arthur_by_Daniel_Huntington_crop.jpeg"}
+      attachment = {name: "link: #{self.name}", link: self.url, caption: self.name, description: self.short_description, picture: self.avatar_url}
       target_id = "me"
       options = {}
       Sender.send_to_facebook(self.content.html_safe, attachment, target_id, options, fql_token)
     end
+  end
+
+  def url
+    host = ENV["host"]
+    "#{host}/articles/#{self.id}"
+  end
+
+  def avatar_url
+    host = ENV["host"]
+    "#{host}#{self.avatar.url}"
   end
 end

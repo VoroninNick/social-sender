@@ -35,7 +35,7 @@ RailsAdmin.config do |config|
     # history_show
   end
 
-  config.included_models = [Article]
+  config.included_models = [Article, FacebookAccount]
 
   config.model Article do
     field :published

@@ -12,7 +12,7 @@ class Article < ActiveRecord::Base
       attachment = {name: "link: #{self.name}", link: self.url, caption: self.name, description: self.short_description, picture: self.avatar_url}
       target_id = "me"
       options = {}
-      Sender.send_to_facebook(self.content.html_safe, attachment, target_id, options, fql_token)
+      Sender.send_to_facebook(self.short_description, attachment, target_id, options, fql_token)
     end
   end
 
